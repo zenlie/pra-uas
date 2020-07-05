@@ -19,9 +19,9 @@ Class ApiDosen extends CI_Controller{
             // di execute dari get - break
             case 'GET': 
                 $data = $this->ModelDosen->show()->result();
-                if ($this->input->get('id_barang') != '') {
-                    $id_barang = $this->input->get('id_barang');
-                    $data = $this->ModelDosen->show_one_barang($id_barang)->result();
+                if ($this->input->get('nip_dosen') != '') {
+                    $nip_dosen = $this->input->get('nip_dosen');
+                    $data = $this->ModelDosen->show_one($nip_dosen)->result();
                 }
                 echo json_encode($data);
             break;
@@ -96,8 +96,8 @@ Class ApiDosen extends CI_Controller{
                   'code' => 404,
                   'message' => 'Data Not Found'
                );
-               $barang = $this->ModelDosen->show_one($nip_dosen)->result();         
-               if (count($barang) == 1) {
+               $result = $this->ModelDosen->show_one($nip_dosen)->result();         
+               if (count($result) == 1) {
                   $data = $this->ModelDosen->delete($nip_dosen);
                   http_response_code(202);
                   $arrResult = array(
