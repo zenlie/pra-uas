@@ -19,9 +19,9 @@ Class ApiMatakuliah extends CI_Controller{
             // di execute dari get - break
             case 'GET': 
                 $data = $this->ModelMatakuliah->show()->result();
-                if ($this->input->get('id_barang') != '') {
-                    $id_barang = $this->input->get('id_barang');
-                    $data = $this->ModelMatakuliah->show_one_barang($id_barang)->result();
+                if ($this->input->get('kd_matkul') != '') {
+                    $kd_matkul = $this->input->get('kd_matkul');
+                    $data = $this->ModelMatakuliah->show_one($kd_matkul)->result();
                 }
                 echo json_encode($data);
             break;
@@ -65,9 +65,9 @@ Class ApiMatakuliah extends CI_Controller{
                   'code' => 404,
                   'message' => 'Data Not Found'
                );
-               $barang = $this->ModelMatakuliah->show_one($kd_matkul )->result();
-               $data = $this->ModelMatakuliah->update($kd_matkul , $nm_matkul, $sks);
-               if (count($barang) == 1) {
+               $result = $this->ModelMatakuliah->show_one($kd_matkul)->result();
+               $data = $this->ModelMatakuliah->update($kd_matkul, $nm_matkul, $sks);
+               if (count($result) == 1) {
                   http_response_code(200);
                   $arrResult = array(
                      'result' => true,
@@ -96,9 +96,9 @@ Class ApiMatakuliah extends CI_Controller{
                   'code' => 404,
                   'message' => 'Data Not Found'
                );
-               $barang = $this->ModelMatakuliah->show_one($kd_matkul )->result();         
-               if (count($barang) == 1) {
-                  $data = $this->ModelMatakuliah->delete($kd_matkul );
+               $result = $this->ModelMatakuliah->show_one($kd_matkul)->result();         
+               if (count($result) == 1) {
+                  $data = $this->ModelMatakuliah->delete($kd_matkul);
                   http_response_code(202);
                   $arrResult = array(
                      'result' => true,
