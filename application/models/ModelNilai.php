@@ -6,7 +6,7 @@ Class ModelNilai extends CI_Model{
         $this->db->select('*'); //take1
         $this->db->from('nilai'); //take1
         $this->db->join('mahasiswa', 'nilai.nim_mhs = mahasiswa.nim_mhs'); //take1
-        $this->db->join('kd_matkul', 'nilai.kd_matkul = kd_matkul.kd_matkul'); //take1
+        $this->db->join('matakuliah', 'nilai.kd_matkul = matakuliah.kd_matkul'); //take1
         $data = $this->db->get(); //take1
         return $data; //take1
     }
@@ -16,7 +16,7 @@ Class ModelNilai extends CI_Model{
         $this->db->select('*'); //take2
         $this->db->from('nilai'); //take2
         $this->db->join('mahasiswa', 'nilai.nim_mhs = mahasiswa.nim_mhs'); //take2
-        $this->db->join('kd_matkul', 'nilai.kd_matkul = kd_matkul.kd_matkul'); //take2
+        $this->db->join('matakuliah', 'nilai.kd_matkul = matakuliah.kd_matkul'); //take2
         $this->db->where('id_nilai', $id); //take2
         $data = $this->db->get(); //take2
         return $data; //take2
