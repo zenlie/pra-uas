@@ -6,6 +6,9 @@ Class ModelJadwal extends CI_Model{
         $this->db->select('*'); //take1
         $this->db->from('jadwal'); //take1
         $this->db->join('jurusan', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take1
+        $this->db->join('matakuliah', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take1
+        $this->db->join('ruangan', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take1
+        $this->db->join('jurusan', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take1
         $data = $this->db->get(); //take1
         return $data; //take1
     }
