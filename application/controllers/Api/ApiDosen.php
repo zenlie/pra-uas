@@ -65,9 +65,9 @@ Class ApiDosen extends CI_Controller{
                   'code' => 404,
                   'message' => 'Data Not Found'
                );
-               $barang = $this->ModelDosen->show_one($nip_dosen)->result();
+               $result = $this->ModelDosen->show_one($nip_dosen)->result();
                $data = $this->ModelDosen->update($nip_dosen, $nm_dosen, $tanla_dosen, $jk_dosen, $notelp_dosen, $alamat_dosen);
-               if (count($barang) == 1) {
+               if (count($result) == 1) {
                   http_response_code(200);
                   $arrResult = array(
                      'result' => true,
