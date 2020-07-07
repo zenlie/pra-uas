@@ -3,7 +3,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-Class ApiLogin extends CI_Controller{
+Class ApiLogin extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -19,29 +19,18 @@ Class ApiLogin extends CI_Controller{
                 $username = $this->input->post('username');
                 $password = $this->input->post('password');
                 $data = $this->ModelLogin->cek_login($username, $password);
-                http_response_code(500);
-                $arrResult = array(
-                    'result' => false,
-                    'code' => 500,
-                    'message' => 'Internal Server Error'
-                );
                 if (count($data) == 1) {
-                    http_response_code(200);
-                    $arrResult = array(
-                        'result' => true,
-                        'code' => 200,
-                        'message' => 'Login was successful',
-                        'data' => $data
-                    );
+                    foreach ($data as $key => $value) {
+                        echo $value->username;
+                    }
+                    die;
+                    redirect('dashboard');
+                }else {
+                    redirect('login');
                 }
-                echo json_encode($arrResult);
+                // echo json_encode($arrResult);
             break;
         }
-    }
-
-    public function clogin()
-    {
-        echo "ApiLogin";
     }
 }
 
