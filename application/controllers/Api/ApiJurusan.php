@@ -17,7 +17,7 @@ Class ApiJurusan extends CI_Controller {
                 $data = $this->ModelJurusan->show()->result();  //take1
                 if ($this->input->get('kd_jurusan') != '') {  //take 1 take2
                     $kd_jurusan = $this->input->get('kd_jurusan'); //take 1 take2
-                    $data = $this->ModelJurusan->show_one($kd_jurusan)->result_array(); //take2
+                    $data = $this->ModelJurusan->show_one($kd_jurusan)->result(); //take2
                 } //take2
                 echo json_encode($data); //take2
             break;

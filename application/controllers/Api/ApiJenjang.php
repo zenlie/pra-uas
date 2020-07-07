@@ -21,7 +21,7 @@ Class ApiJenjang extends CI_Controller{
                 $data = $this->ModelJenjang->show()->result();
                 if ($this->input->get('kd_jenjang') != '') {
                     $kd_jenjang = $this->input->get('kd_jenjang');
-                    $data = $this->ModelJenjang->show_one($kd_jenjang)->result();
+                    $data = $this->ModelJenjang->show_one($kd_jenjang)->result_array();
                 }
                 echo json_encode($data);
             break;

@@ -1,57 +1,50 @@
 <?php
-Class Model_user extends CI_Model{
+Class ModelUser extends CI_Model{
 
-    public function check_secret_key($secret_key)
+    public function show()
     {
-        $data=$this->db->get_where('tbl_user',array('sk_user'=>$secret_key));
+        $data=$this->db->get('user');
         return $data;
     }
 
-    public function show_user()
+    public function show_one($id)
     {
-        $data=$this->db->get('tbl_user');
-        return $data;
-    }
-
-    public function show_one_user($id)
-    {
-        $data=$this->db->get_where('tbl_user',array('id_user'=>$id));
-        return $data;
-    }
+        $this->db->select('*'); //take2
+        $this->db->from('user'); //take2
+        $this->db->join('usergroup', 'user.id_usergroup = usergroup.id_usergroup'); //take2
+        $this->db->where('id_usergroup', $id); //take2
+        $data = $this->db->get(); //take2
+        return $data; //take2
+    }  
 
     public function add()
     {
-        $data=[
+        $data = [
             'id_user' => $this->input->post('id_user'),
-            'nm_user'        => $this->input->post('nm_user'),
-            'username'  => $this->input->post('username'),
-            'password'  => $this->input->post('password'),
-            'email_user' => $this->input->post('email_user'),
-            'level_user'  => $this->input->post('level_user'),
-            'sk_user'  => $this->input->post('sk_user'),
-
-         ];
-         return $this->db->insert('tbl_user',$data);
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password'),
+            'foto_user' => $this->input->post('foto_user'),
+            'id_usergroup' => $this->input->post('id_usergroup'),
+        ];
+        return $this->db->insert('user',$data);
     }
     public function edit($id)
     {
-        $data=$this->db->get_where('tbl_user',array('id_user'=>$id));
+        $data=$this->db->get_where('user',array('id_user'=>$id));
         return $data;
     }
 
-    public function update($id_user, $nm_user, $username, $password, $email_user, $level_user, $sk_user)
+    public function update($id_user, $username, $password, $foto_user, $id_usergroup)
     {
         $data=[
-            'nm_user' => $nm_user,
             'username' => $username,
             'password' => $password,
-            'email_user' => $email_user,
-            'level_user' => $level_user,
-            'sk_user' => $sk_user,            
+            'foto_user' => $foto_user,
+            'id_usergroup' => $id_usergroup,
 
          ];
          $this->db->where('id_user',$id_user);
-         return $this->db->update('tbl_user',$data);
+         return $this->db->update('user',$data);
 
     }
 
@@ -60,7 +53,7 @@ Class Model_user extends CI_Model{
 
         $id_user = $id_user;
         $this->db->where('id_user',$id_user);
-        return $this->db->delete('tbl_user');
+        return $this->db->delete('user');
 
     }    
 

@@ -3,12 +3,12 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-Class ApiUser extends CI_Controller{
+Class ApiUsergroup extends CI_Controller{
 
     function __construct() {
         parent::__construct();
         // $this->load->helper('authentication');
-        $this->load->Model('ModelUser');
+        $this->load->Model('ModelUsergroup');
     }
 
     public function index()
@@ -18,16 +18,16 @@ Class ApiUser extends CI_Controller{
         switch ($req) {
             // di execute dari get - break
             case 'GET': 
-                $data = $this->ModelUser->show()->result();
-                if ($this->input->get('id_user') != '') {
-                    $id_user = $this->input->get('id_user');
-                    $data = $this->ModelUser->show_one($id_user)->result();
+                $data = $this->ModelUsergroup->show()->result();
+                if ($this->input->get('id_usergroup') != '') {
+                    $id_usergroup = $this->input->get('id_usergroup');
+                    $data = $this->ModelUsergroup->show_one($id_usergroup)->result();
                 }
                 echo json_encode($data);
             break;
 
           case 'POST':
-               $data = $this->ModelUser->add();
+               $data = $this->ModelUsergroup->add();
 
                http_response_code(500);
                $arrResult = array(
@@ -65,8 +65,8 @@ Class ApiUser extends CI_Controller{
                   'code' => 404,
                   'message' => 'Data Not Found'
                );
-               $result = $this->ModelUser->show_one($id_user)->result();
-               $data = $this->ModelUser->update($id_user, $username, $password, $foto_user, $id_usergroup);
+               $result = $this->ModelUsergroup->show_one($id_usergroup)->result();
+               $data = $this->ModelUsergroup->update($id_usergroup, $nm_usergroup);
                if (count($result) == 1) {
                   http_response_code(200);
                   $arrResult = array(
@@ -96,9 +96,9 @@ Class ApiUser extends CI_Controller{
                   'code' => 404,
                   'message' => 'Data Not Found'
                );
-               $result = $this->ModelUser->show_one($id_user)->result();         
+               $result = $this->ModelUsergroup->show_one($id_usergroup)->result();         
                if (count($result) == 1) {
-                  $data = $this->ModelUser->delete($id_user);
+                  $data = $this->ModelUsergroup->delete($id_usergroup);
                   http_response_code(202);
                   $arrResult = array(
                      'result' => true,

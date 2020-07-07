@@ -40,7 +40,7 @@ Class ModelJurusan extends CI_Model{
     {
         $data=[
             'nm_jurusan' => $nm_jurusan,
-            'kd_jenjang' -> $kd_jenjang,
+            'kd_jenjang' => $kd_jenjang,
          ];
          $this->db->where('kd_jurusan',$kd_jurusan);
          return $this->db->update('jurusan',$data);
