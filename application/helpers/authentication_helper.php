@@ -12,8 +12,8 @@ foreach ($headers as $header => $value) {
 if ($secret_key != '') {
     $CI = get_instance();
 
-    $CI->load->model('Model_User');
-    $data = $CI->Model_User->check_secret_key($secret_key)->result();
+    $CI->load->model('ModelApiKeys');
+    $data = $CI->ModelApiKeys->show_one($secret_key)->result();
     (count($data) != 0) ? $authentication = true : $authentication = false;
 }
 if (!$authentication) {

@@ -7,7 +7,7 @@ Class ApiUser extends CI_Controller{
 
     function __construct() {
         parent::__construct();
-        // $this->load->helper('authentication');
+      //   $this->load->helper('authentication');
         $this->load->Model('ModelUser');
     }
 
@@ -96,7 +96,7 @@ Class ApiUser extends CI_Controller{
                   'code' => 404,
                   'message' => 'Data Not Found'
                );
-               $result = $this->ModelUser->show_one($id_user)->result();         
+               $result = $this->ModelUser->show_one($id_user)->result();//yg mau di showone id_user         
                if (count($result) == 1) {
                   $data = $this->ModelUser->delete($id_user);
                   http_response_code(202);

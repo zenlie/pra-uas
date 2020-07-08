@@ -5,10 +5,10 @@ Class ModelJadwal extends CI_Model{
     {
         $this->db->select('*'); //take1
         $this->db->from('jadwal'); //take1
-        $this->db->join('jurusan', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take1
-        $this->db->join('matakuliah', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take1
-        $this->db->join('ruangan', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take1
-        $this->db->join('jurusan', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take1
+        $this->db->join('jurusan', 'jadwal.kd_jurusan = jurusan.kd_jurusan'); //take1
+        $this->db->join('matakuliah', 'jadwal.kd_matkul = matakuliah.kd_matkul'); //take1
+        $this->db->join('ruangan', 'jadwal.kd_ruangan = ruangan.kd_ruangan'); //take1
+        $this->db->join('dosen', 'jadwal.nip_dosen = dosen.nip_dosen'); //take1
         $data = $this->db->get(); //take1
         return $data; //take1
     }
@@ -17,7 +17,10 @@ Class ModelJadwal extends CI_Model{
     {
         $this->db->select('*'); //take2
         $this->db->from('jadwal'); //take2
-        $this->db->join('jurusan', 'jadwal.nip_dosen = jurusan.nip_dosen'); //take2
+        $this->db->join('jurusan', 'jadwal.kd_jurusan = jurusan.kd_jurusan'); //take1
+        $this->db->join('matakuliah', 'jadwal.kd_matkul = matakuliah.kd_matkul'); //take1
+        $this->db->join('ruangan', 'jadwal.kd_ruangan = ruangan.kd_ruangan'); //take1
+        $this->db->join('dosen', 'jadwal.nip_dosen = dosen.nip_dosen'); //take1
         $this->db->where('id_jdwl', $id); //take2
         $data = $this->db->get(); //take2
         return $data; //take2
@@ -31,6 +34,7 @@ Class ModelJadwal extends CI_Model{
             'jam_jdwl' => $this->input->post('jam_jdwl'),
             'kd_matkul' => $this->input->post('kd_matkul'),
             'kd_ruangan' => $this->input->post('kd_ruangan'),
+            'kd_jurusan' => $this->input->post('kd_jurusan'),
             'nip_dosen' => $this->input->post('nip_dosen'),
         ];
         return $this->db->insert('jadwal',$data);
@@ -42,7 +46,7 @@ Class ModelJadwal extends CI_Model{
         return $data;
     }
 
-    public function update($id_jdwl, $hari_jdwl, $jam_jdwl, $kd_matkul, $kd_ruangan, $nip_dosen)
+    public function update($id_jdwl, $hari_jdwl, $jam_jdwl, $kd_matkul, $kd_ruangan, $kd_jurusan, $nip_dosen)
     {
         $data=[
             'hari_jdwl' => $hari_jdwl,

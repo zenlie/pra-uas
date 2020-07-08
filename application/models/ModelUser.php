@@ -12,7 +12,7 @@ Class ModelUser extends CI_Model{
         $this->db->select('*'); //take2
         $this->db->from('user'); //take2
         $this->db->join('usergroup', 'user.id_usergroup = usergroup.id_usergroup'); //take2
-        $this->db->where('id_usergroup', $id); //take2
+        $this->db->where('id_user', $id); //take2 cek api user showOne $var 
         $data = $this->db->get(); //take2
         return $data; //take2
     }  

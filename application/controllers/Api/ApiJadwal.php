@@ -7,6 +7,7 @@ Class ApiJadwal extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        // $this->load->helper('authentication');
         $this->load->Model('ModelJadwal');
     }
 
@@ -95,7 +96,7 @@ Class ApiJadwal extends CI_Controller {
                        'message' => 'Data Not Found'
                     );
                     $result = $this->ModelJadwal->show_one($id_jdwl)->result();         
-                    if (count($result) == 1) {
+                    if (count($result) == 1) {//jumlah count data berdasarkan id
                        $data = $this->ModelJadwal->delete($id_jdwl);
                        http_response_code(202);
                        $arrResult = array(

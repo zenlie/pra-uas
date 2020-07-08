@@ -26,22 +26,14 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Hello <?= $this->session->userdata['username'] ?></p>
 
-      <form action="<?php echo site_url('Api/ApiLogin') ?>" method="post">
+      <form action="<?php echo site_url('Api/ApiLogin/secretKeys') ?>" method="post">
         <div class="input-group mb-3">
-          <input type="text" name="username" class="form-control" placeholder="Username">
+          <input type="text" class="form-control" readonly value = "<?= (isset($this->session->userdata['api_keys']) ? $this->session->userdata['api_keys']  : 'Secret key') ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
@@ -49,7 +41,7 @@
 
           <!-- /.col -->
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Generate</button>
           </div>
           <!-- /.col -->
         </div>

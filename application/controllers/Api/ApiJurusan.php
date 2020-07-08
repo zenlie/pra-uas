@@ -7,6 +7,7 @@ Class ApiJurusan extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        // $this->load->helper('authentication');
         $this->load->Model('ModelJurusan');
     }
 

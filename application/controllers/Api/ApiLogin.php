@@ -19,29 +19,29 @@ Class ApiLogin extends CI_Controller{
                 $username = $this->input->post('username');
                 $password = $this->input->post('password');
                 $data = $this->ModelLogin->cek_login($username, $password);
-                http_response_code(500);
-                $arrResult = array(
-                    'result' => false,
-                    'code' => 500,
-                    'message' => 'Internal Server Error'
-                );
+
                 if (count($data) == 1) {
-                    http_response_code(200);
-                    $arrResult = array(
-                        'result' => true,
-                        'code' => 200,
-                        'message' => 'Login was successful',
-                        'data' => $data
-                    );
+                    foreach ($data as $key => $value) {
+                        $userData = array(
+                            'id_user' => $value->id_user,
+                            'username' => $value->username,
+                            'id_usergroup ' => $value->id_usergroup,
+                            'foto_user' => $value->foto_user,                            
+                            'is_login' => TRUE
+                        );
+                    }
+                    $this->session->set_userdata($userData);
+                    redirect('dashboard');
+                } else {
+                    redirect('');
                 }
-                echo json_encode($arrResult);
             break;
         }
     }
 
-    public function clogin()
+    public function secretKeys()
     {
-        echo "ApiLogin";
+        $this->ModelLogin->createSecretKeys($this->session->userdata);
     }
 }
 

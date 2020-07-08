@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-include APPPATH.'controllers/Api/ApiLogin.php';
 
-class Login extends ApiLogin
+class Login extends CI_Controller
 {
 
     function __construct() {
@@ -12,12 +11,5 @@ class Login extends ApiLogin
     public function index()
     {
         $this->load->view('login/login');
-    }
-
-
-    
-    public function process_login()
-    {
-        var_dump($this->index());
     }
 }
